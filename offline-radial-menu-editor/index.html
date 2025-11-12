@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plasticity Radial Menu Editor (Offline)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Plasticity Radial Menu Editor</h1>
+    <p class="tagline">Offline-ready tool for building radial menu presets for Plasticity.</p>
+  </header>
+
+  <main>
+    <section class="column">
+      <h2>Menu Items</h2>
+      <div class="controls">
+        <button id="add-item">Add item</button>
+        <button id="duplicate-item" disabled>Duplicate</button>
+        <button id="remove-item" disabled>Remove</button>
+      </div>
+      <ul id="item-list" class="item-list" aria-live="polite"></ul>
+
+      <div id="item-editor" class="item-editor hidden" aria-live="polite">
+        <h3>Edit item</h3>
+        <label>
+          Label
+          <input type="text" id="item-label" maxlength="60" />
+        </label>
+        <label>
+          Command / Notes
+          <textarea id="item-command" rows="3"></textarea>
+        </label>
+        <label>
+          Key binding
+          <input type="text" id="item-keybind" maxlength="30" />
+        </label>
+        <label>
+          Icon text (emoji or short text)
+          <input type="text" id="item-icon" maxlength="4" />
+        </label>
+        <label class="color-picker">
+          Slice colour
+          <input type="color" id="item-color" />
+        </label>
+        <label class="slider">
+          Slice weight
+          <input type="range" id="item-weight" min="1" max="4" step="1" />
+          <span id="item-weight-value"></span>
+        </label>
+      </div>
+
+      <div class="ordering">
+        <button id="move-up" disabled>Move up</button>
+        <button id="move-down" disabled>Move down</button>
+      </div>
+
+      <div class="import-export">
+        <h3>Import / Export</h3>
+        <div class="import">
+          <label class="file-input">
+            <span>Select JSON file</span>
+            <input type="file" id="import-file" accept="application/json" />
+          </label>
+          <button id="load-json">Load</button>
+        </div>
+        <button id="export-json">Download preset</button>
+        <button id="copy-json">Copy JSON</button>
+        <textarea id="json-output" rows="8" readonly></textarea>
+      </div>
+    </section>
+
+    <section class="column preview">
+      <h2>Preview</h2>
+      <canvas id="menu-preview" width="520" height="520" role="img" aria-label="Radial menu preview"></canvas>
+      <div class="preview-options">
+        <label>
+          Inner radius
+          <input type="range" id="inner-radius" min="0" max="0.7" step="0.05" />
+          <span id="inner-radius-value"></span>
+        </label>
+        <label>
+          Gap between slices
+          <input type="range" id="gap-angle" min="0" max="8" step="0.5" />
+          <span id="gap-angle-value"></span>
+        </label>
+        <label>
+          Background
+          <input type="color" id="background-color" value="#1b1d26" />
+        </label>
+      </div>
+
+      <section class="help">
+        <h3>How to use</h3>
+        <ol>
+          <li>Click <strong>Add item</strong> to insert slices into the menu.</li>
+          <li>Select a slice in the list to edit its details and colour.</li>
+          <li>Use <strong>Move up</strong> / <strong>Move down</strong> to reorder slices around the circle.</li>
+          <li>Export your preset as JSON and drop it into Plasticity's radial menu configuration.</li>
+        </ol>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <p>This project bundles every dependency locally so it can run entirely offline. Save this folder and open <code>index.html</code> in any modern browser.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,2 +1,7 @@
-# -
-使用spec流程进行刘慈欣风格仿写测试
+# Cixin-Liu-genre-imitation-with-AI
+
+## Offline Plasticity radial menu editor
+
+This repository now bundles an offline clone of PepperKUN's Plasticity radial menu editor. Copy the [`offline-radial-menu-editor`](offline-radial-menu-editor/) directory anywhere inside your internal network and open `index.html` in a browser to start editing Plasticity radial menu presets without internet access.
+
+See the [tool README](offline-radial-menu-editor/README.md) for usage instructions.
