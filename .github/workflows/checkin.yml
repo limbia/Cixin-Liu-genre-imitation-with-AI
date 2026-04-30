@@ -1,0 +1,31 @@
+name: Daily Check-in
+
+on:
+  schedule:
+    - cron: "0 23 * * *" # UTC 23:00 = 北京时间 07:00
+  workflow_dispatch:
+
+jobs:
+  checkin:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run check-in
+        env:
+          CHECKIN_BASE_URL: ${{ secrets.CHECKIN_BASE_URL }}
+          CHECKIN_USERNAME: ${{ secrets.CHECKIN_USERNAME }}
+          CHECKIN_PASSWORD: ${{ secrets.CHECKIN_PASSWORD }}
+          CHECKIN_STRICT: "false"
+        run: python checkin.py
