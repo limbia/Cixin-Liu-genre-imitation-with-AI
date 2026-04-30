@@ -68,6 +68,7 @@ def auto_checkin(username: str, password: str) -> int:
             data = {}
 
         if resp.status_code == 200 and isinstance(data, dict) and data.get("success"):
+        if resp.status_code == 200 and data.get("success"):
             print(f"🎉 签到成功！命中接口: {url}")
             message = data.get("message")
             if message:
@@ -87,6 +88,11 @@ def auto_checkin(username: str, password: str) -> int:
 
     print("STRICT 模式关闭：为避免定时任务整体失败，本次返回 0。")
     return 0
+        print(f"  响应: HTTP {resp.status_code}; success={data.get('success') if isinstance(data, dict) else None}; message={message}")
+
+    print("\n⚠️ 未命中可用签到接口。")
+    print("建议：浏览器登录后打开开发者工具 Network，点击签到按钮抓包确认真实 API 路径。")
+    return 3
 
 
 def main() -> int:
