@@ -8,6 +8,14 @@ on:
 jobs:
   checkin:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,4 +33,5 @@ jobs:
           CHECKIN_BASE_URL: ${{ secrets.CHECKIN_BASE_URL }}
           CHECKIN_USERNAME: ${{ secrets.CHECKIN_USERNAME }}
           CHECKIN_PASSWORD: ${{ secrets.CHECKIN_PASSWORD }}
+          CHECKIN_STRICT: "false"
         run: python checkin.py
